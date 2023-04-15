@@ -20,7 +20,6 @@ window.MonacoEnvironment = {
 const htmleditor = monaco.editor.create(document.querySelector("#html"), {
   value: '',
   language: "html",
-  autoIndent: true,
   theme: "vs-dark",
 })
 const jseditor = monaco.editor.create(document.querySelector("#js"), {
@@ -32,7 +31,6 @@ const csseditor = monaco.editor.create(document.querySelector("#css"), {
   value: '',
   language: "css",
   theme: 'vs-dark',
-  autoClosingQuotes: true,
 })
 
 htmleditor.onDidChangeModelContent(update)
@@ -40,7 +38,7 @@ csseditor.onDidChangeModelContent(update)
 jseditor.onDidChangeModelContent(update)
 
 
-function update () {
+async function update () {
   const html = htmleditor.getValue()
   const css = csseditor.getValue()
   const js = jseditor.getValue()
@@ -68,5 +66,5 @@ function update () {
   </html>
 
   `
-  document.querySelector("iframe").srcdoc = body
+  document.querySelector("iframe").srcdoc = await body
 }
